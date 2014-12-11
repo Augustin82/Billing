@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCS package.
  *
- * Copyright 2014 Nicolas Macherey (nicolas.macherey@gmail.com)
+ * Copyright 2014 Nicolas Macherey <nicolas.macherey@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,7 +14,7 @@ namespace UCS\Component\Billing\Pricer;
  * Define an item that contains either a debit or a credit. Pricers are used
  * to adjust orders/orer items accordingly
  *
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 interface PricerInterface
 {

@@ -16,46 +16,67 @@ use UCS\Component\Billing\Pricer\Pricer;
 /**
  * Unit Test Suite for Pricer
  *
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 class PricerTest extends \PHPUnit_Framework_TestCase
 {
     protected $instance;
-    
-    protected function setup() {
+
+    protected function setup()
+    {
         $this->instance = new Pricer();
     }
-    
-    public function testId() {
+
+    /**
+     * Test id
+     */
+    public function testId()
+    {
         $this->assertNull($this->instance->getId());
     }
-    
-    public function testLabel() {
+
+    /**
+     * Test label
+     */
+    public function testLabel()
+    {
         $this->assertNull($this->instance->getLabel());
 
         $value = 'label';
         $this->instance->setLabel($value);
         $this->assertEquals($value, $this->instance->getLabel());
     }
-    
-    public function testDescription() {
+
+    /**
+     * Test description
+     */
+    public function testDescription()
+    {
         $this->assertNull($this->instance->getDescription());
 
         $value = 'description';
         $this->instance->setDescription($value);
         $this->assertEquals($value, $this->instance->getDescription());
     }
-    
-    public function testSubject() {
+
+    /**
+     * Test subject
+     */
+    public function testSubject()
+    {
         $this->assertNull($this->instance->getSubject());
 
         $value = $this->getMock('UCS\Component\Billing\Pricer\PricerSubjectInterface');
         $this->instance->setSubject($value);
         $this->assertEquals($value, $this->instance->getSubject());
     }
-    
-    public function testAmount() {
-        $this->assertEquals(0.0,$this->instance->getAmount());
+
+    /**
+     * Test amount
+     */
+    public function testAmount()
+    {
+        $this->assertEquals(0.0, $this->instance->getAmount());
 
         $value = 10.0;
         $this->instance->setAmount($value);
@@ -68,8 +89,12 @@ class PricerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->instance->isCredit());
         $this->assertTrue($this->instance->isCharge());
     }
-    
-    public function testNeutral() {
+
+    /**
+     * Test neutral
+     */
+    public function testNeutral()
+    {
         $this->assertFalse($this->instance->isNeutral());
 
         $value = true;

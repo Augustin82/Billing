@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCS package.
  *
- * Copyright 2014 Nicolas Macherey (nicolas.macherey@gmail.com)
+ * Copyright 2014 Nicolas Macherey <nicolas.macherey@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,38 +11,37 @@
 namespace UCS\Component\Billing\Order;
 
 /* Imports */
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use UCS\Component\Referenceable\ReferenceableInterface;
 use UCS\Component\Billing\Pricer\PricerSubjectInterface;
 
 /**
  * Order Interface Representation, the interface implements the \Countable
- * interface so that it should return in count the total number of items. 
+ * interface so that it should return in count the total number of items.
  *
- * It also must implements the \IteratorAggregate interface so that you can 
+ * It also must implements the \IteratorAggregate interface so that you can
  * easily iterate over order items.
- * 
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ *
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface, \Countable, \IteratorAggregate
 {
     /**
      * Get the order state
-     * 
+     *
      * @return OrderStateInterface
      */
     public function getState();
-    
+
     /**
      * Set the order state
      *
-     * @param OrderStateInterface $orderState
+     * @param OrderStateInterface $state
      *
      * @return OrderInterface
      */
     public function setState(OrderStateInterface $state);
-    
+
     /**
      * Check wheather the order has been completed or not
      *
@@ -56,12 +55,12 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * @return OrderInterface
      */
     public function complete();
-    
+
     /**
      * Get order items
      *
-     * @return Collection|OrderItemInterface[] An array or collection of 
-     *    OrderItemInterface
+     * @return Collection|OrderItemInterface[] An array or collection of
+     *                                         OrderItemInterface
      */
     public function getItems();
 
@@ -98,7 +97,7 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * @return Boolean
      */
     public function hasItem(OrderItemInterface $item);
-    
+
     /**
      * Checks whether the order is empty or not
      *
@@ -110,7 +109,7 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * Clears all items
      */
     public function clearItems();
-    
+
     /**
      * Returns total quantity of items, i.e sums all items quantities and
      * returns the value.
@@ -118,9 +117,9 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * @return integer
      */
     public function getTotalQuantity();
-    
+
     /**
-     * Get order total. 
+     * Get order total.
      * Items Price + adjustments
      *
      * @return float
@@ -134,7 +133,7 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * @param float $total
      */
     public function setTotalPrice($total);
-    
+
     /**
      * Get items total.
      * Sums all items prices

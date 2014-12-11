@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCS package.
  *
- * Copyright 2014 Nicolas Macherey (nicolas.macherey@gmail.com)
+ * Copyright 2014 Nicolas Macherey <nicolas.macherey@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,7 +24,7 @@ namespace UCS\Component\Billing\Order;
  *
  * This class has been made to control the order state workflow.
  *
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 class OrderState implements OrderStateInterface
 {
@@ -32,44 +32,49 @@ class OrderState implements OrderStateInterface
      * @®ar integer
      */
     protected $id;
-    
+
     /**
      * @®ar string
      */
     protected $name;
-    
+
     /**
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
-    
-    /**
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
-    
-    /**
-     * @param string
-     */
-    public function setName($name) {
-        $this->name = $name;
-        return $name;
-    }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function serialize() {
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
         return serialize(array(
             $this->id,
             $this->name,
         ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

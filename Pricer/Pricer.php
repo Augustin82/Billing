@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCS package.
  *
- * Copyright 2014 Nicolas Macherey (nicolas.macherey@gmail.com)
+ * Copyright 2014 Nicolas Macherey <nicolas.macherey@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,7 +13,7 @@ namespace UCS\Component\Billing\Pricer;
 /**
  * Default Pricer Implementation
  *
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 class Pricer implements PricerInterface
 {
@@ -73,6 +73,7 @@ class Pricer implements PricerInterface
     public function setSubject(PricerSubjectInterface $subject = null)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
@@ -90,6 +91,7 @@ class Pricer implements PricerInterface
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -107,6 +109,7 @@ class Pricer implements PricerInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -124,6 +127,7 @@ class Pricer implements PricerInterface
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -141,6 +145,7 @@ class Pricer implements PricerInterface
     public function setNeutral($neutral)
     {
         $this->neutral = $neutral;
+
         return $this;
     }
 

@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCS package.
  *
- * Copyright 2014 Nicolas Macherey (nicolas.macherey@gmail.com)
+ * Copyright 2014 Nicolas Macherey <nicolas.macherey@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,7 +13,7 @@ namespace UCS\Component\Billing\Pricer;
 /**
  * Pricer Subjects contains Pricers
  *
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 interface PricerSubjectInterface
 {
@@ -28,6 +28,8 @@ interface PricerSubjectInterface
      * Add pricer
      *
      * @param PricerInterface $pricer
+     *
+     * @return self
      */
     public function addPricer(PricerInterface $pricer);
 
@@ -35,13 +37,17 @@ interface PricerSubjectInterface
      * Remove pricer
      *
      * @param PricerInterface $pricer
+     *
+     * @return self
      */
     public function removePricer(PricerInterface $pricer);
 
     /**
-     * Check if the given pricer exists 
+     * Check if the given pricer exists
      *
      * @param PricerInterface $pricer
+     *
+     * @return boolean
      */
     public function hasPricer(PricerInterface $pricer);
 
@@ -55,7 +61,9 @@ interface PricerSubjectInterface
     /**
      * Set pricers total
      *
-     * @return float
+     * @param float $amount
+     *
+     * @return self
      */
     public function setTotalPricersAmount($amount);
 

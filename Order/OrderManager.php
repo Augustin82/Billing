@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCS package.
  *
- * Copyright 2014 Nicolas Macherey (nicolas.macherey@gmail.com)
+ * Copyright 2014 Nicolas Macherey <nicolas.macherey@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,7 +19,7 @@ use UCS\Component\Billing\Order\Exception\OrderNotFoundException;
  * Abstract Order Manager implementation which can be used as base class for your
  * concrete manager.
  *
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 abstract class OrderManager implements OrderManagerInterface
 {
@@ -31,7 +31,7 @@ abstract class OrderManager implements OrderManagerInterface
     public function createOrder()
     {
         $class = $this->getClass();
-        $order = new $class;
+        $order = new $class();
 
         return $order;
     }
@@ -58,11 +58,11 @@ abstract class OrderManager implements OrderManagerInterface
     public function findOrderByIdOrReference($idOrReference)
     {
         $order = $this->findOrderByReference($idOrReference);
-        
-        if( $order == null ) {
+
+        if ($order == null) {
             $order = $this->findOrderById($idOrReference);
         }
-        
+
         return $order;
     }
 
@@ -75,13 +75,13 @@ abstract class OrderManager implements OrderManagerInterface
         if (!$order instanceof $class) {
             throw new UnsupportedOrderException('Order class is not supported.');
         }
-        
+
         if (!$order instanceof Order) {
             throw new UnsupportedOrderException(sprintf('Expected an instance of UCS\Component\Billing\Order\Order, but got "%s".', get_class($order)));
         }
 
         $reloadedOrder = $this->findOrderBy(array('reference' => $order->getReference()));
-        
+
         if (null === $reloadedOrder) {
             throw new OrderNotFoundException(sprintf('Order with Reference "%d" could not be reloaded.', $order->getReference()));
         }
@@ -96,7 +96,7 @@ abstract class OrderManager implements OrderManagerInterface
     {
         $itemsTotal = $this->calculateItemsTotal($order->getItems());
         $pricersTotal = $this->calculatePricersTotal($order->getPricers());
-        
+
         $total = $itemsTotal + $pricersTotal;
 
         if ($total < 0) {
@@ -106,7 +106,7 @@ abstract class OrderManager implements OrderManagerInterface
         $order->setTotalPrice($total);
         $order->setItemsTotalPrice($itemsTotal);
         $order->setTotalPricersAmount($pricersTotal);
-        
+
         return $total;
     }
 
@@ -121,7 +121,7 @@ abstract class OrderManager implements OrderManagerInterface
             $this->calculateItemTotal($item);
             $itemsTotal += $item->getTotalPrice();
         }
-        
+
         return $itemsTotal;
     }
 
@@ -138,9 +138,9 @@ abstract class OrderManager implements OrderManagerInterface
         if ($total < 0) {
             $total = 0;
         }
-        
+
         $item->setTotalPrice($total);
-        
+
         return $total;
     }
 
@@ -156,7 +156,7 @@ abstract class OrderManager implements OrderManagerInterface
                 $pricersTotal += $pricer->getAmount();
             }
         }
-        
+
         return $pricersTotal;
     }
 }

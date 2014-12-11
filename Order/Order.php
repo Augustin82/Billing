@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCS package.
  *
- * Copyright 2014 Nicolas Macherey (nicolas.macherey@gmail.com)
+ * Copyright 2014 Nicolas Macherey <nicolas.macherey@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,15 +13,13 @@ namespace UCS\Component\Billing\Order;
 /* Imports */
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use UCS\Component\Referenceable\ReferenceableInterface;
-use UCS\Component\Billing\Pricer\PricerSubjectInterface;
 use UCS\Component\Billing\Pricer\PricerInterface;
 
 /**
  * This class forces the bidirectionnal relation as it makes no sense to have
  * it unidirectionnal.
- * 
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ *
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 class Order implements OrderInterface
 {
@@ -31,42 +29,42 @@ class Order implements OrderInterface
      * @var mixed
      */
     protected $id;
-    
+
     /**
      * @var OrderStateInterface
      */
     protected $state;
-    
+
     /**
      * @var string
      */
     protected $reference;
-    
+
     /**
      * @var boolean
      */
     protected $completed = false;
-    
+
     /**
      * @var ArrayCollection
      */
     protected $items;
-    
+
     /**
      * @var float
      */
     protected $totalPrice = 0.0;
-    
+
     /**
      * @var float
      */
     protected $totalItemsAmount = 0.0;
-    
+
     /**
      * @var float
      */
     protected $totalPricersAmount = 0.0;
-    
+
     /**
      * Default Constructor
      */
@@ -75,7 +73,7 @@ class Order implements OrderInterface
         $this->items = new ArrayCollection();
         $this->pricers = new ArrayCollection();
     }
-    
+
     /**
      * @return mixed
      */
@@ -83,7 +81,7 @@ class Order implements OrderInterface
     {
         return $this->id;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -91,16 +89,17 @@ class Order implements OrderInterface
     {
         return $this->state;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function setState(OrderStateInterface $state)
     {
         $this->state = $state;
-        return $this; 
+
+        return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -108,16 +107,17 @@ class Order implements OrderInterface
     {
         return $this->reference;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function setReference($reference)
     {
         $this->reference = $reference;
-        return $this; 
+
+        return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -125,25 +125,27 @@ class Order implements OrderInterface
     {
         return $this->completed;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function complete()
     {
         $this->completed = true;
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function setCompleted($completed)
     {
         $this->completed = $completed;
-        return $this; 
+
+        return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -151,16 +153,17 @@ class Order implements OrderInterface
     {
         return $this->items;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function setItems(Collection $items)
     {
         $this->items = $items;
-        return $this; 
+
+        return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -169,19 +172,21 @@ class Order implements OrderInterface
         if ($this->hasItem($item)) {
             return $this;
         }
-        
+
         foreach ($this->items as $existingItem) {
             if ($item->isEqualTo($existingItem)) {
                 $existingItem->merge($item, false);
+
                 return $this;
             }
         }
-        
+
         $item->setOrder($this);
         $this->items->add($item);
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -194,7 +199,7 @@ class Order implements OrderInterface
 
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -202,7 +207,7 @@ class Order implements OrderInterface
     {
         return $this->items->contains($item);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -210,7 +215,7 @@ class Order implements OrderInterface
     {
         return $this->count() == 0;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -218,7 +223,7 @@ class Order implements OrderInterface
     {
         return $this->items->count();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -226,30 +231,31 @@ class Order implements OrderInterface
     {
         return $this->items;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function clearItems()
     {
         $this->items->clear();
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function getTotalQuantity()
     {
         $quantity = 0;
-        
+
         foreach ($this->items as $existingItem) {
             $quantity += $existingItem->getQuantity();
         }
-        
+
         return $quantity;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -257,16 +263,17 @@ class Order implements OrderInterface
     {
         return $this->totalPrice;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function setTotalPrice($total)
     {
         $this->totalPrice = $total;
-        return $this; 
+
+        return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -274,16 +281,17 @@ class Order implements OrderInterface
     {
         return $this->totalItemsAmount;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function setItemsTotalPrice($total)
     {
         $this->totalItemsAmount = $total;
-        return $this; 
+
+        return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -291,35 +299,33 @@ class Order implements OrderInterface
     {
         return $this->pricers;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function addPricer(PricerInterface $pricer)
     {
-        if( !$this->hasPricer($pricer) ) 
-        {
+        if (!$this->hasPricer($pricer)) {
             $pricer->setSubject($this);
             $this->pricers->add($pricer);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function removePricer(PricerInterface $pricer)
     {
-        if( $this->hasPricer($pricer) ) 
-        {
+        if ($this->hasPricer($pricer)) {
             $pricer->setSubject(null);
             $this->pricers->removeElement($pricer);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -327,7 +333,7 @@ class Order implements OrderInterface
     {
         return $this->pricers->contains($pricer);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -335,7 +341,7 @@ class Order implements OrderInterface
     {
         return $this->totalPricersAmount;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -343,14 +349,14 @@ class Order implements OrderInterface
     {
         $this->totalPricersAmount = $amount;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function clearPricers()
     {
         $this->pricers->clear();
-        
+
         return $this;
     }
 }

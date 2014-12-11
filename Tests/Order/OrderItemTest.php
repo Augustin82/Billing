@@ -16,83 +16,113 @@ use UCS\Component\Billing\Order\OrderItem;
 /**
  * Unit Test Suite for OrderItem
  *
- * @author Nicolas Macherey (nicolas.macherey@gmail.com)
+ * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
 class OrderItemTest extends \PHPUnit_Framework_TestCase
 {
     protected $instance;
-    
-    protected function setup() {
+
+    protected function setup()
+    {
         $this->instance = new OrderItem();
     }
-    
-    public function testId() {
+
+    /**
+     * Test that the id property is properly handled
+     */
+    public function testId()
+    {
         $this->assertNull($this->instance->getId());
     }
-    
-    public function testQuantity() {
-        $this->assertEquals(0,$this->instance->getQuantity());
+
+    /**
+     * Test that the quantity property is properly handled
+     */
+    public function testQuantity()
+    {
+        $this->assertEquals(0, $this->instance->getQuantity());
 
         $value = 10;
         $this->instance->setQuantity($value);
         $this->assertEquals($value, $this->instance->getQuantity());
     }
-    
-    public function testUnitPrice() {
-        $this->assertEquals(0.0,$this->instance->getUnitPrice());
+
+    /**
+     * Test that the unitPrice property is properly handled
+     */
+    public function testUnitPrice()
+    {
+        $this->assertEquals(0.0, $this->instance->getUnitPrice());
 
         $value = 19.99;
         $this->instance->setUnitPrice($value);
         $this->assertEquals($value, $this->instance->getUnitPrice());
     }
-    
-    public function testTotalPrice() {
-        $this->assertEquals(0.0,$this->instance->getTotalPrice());
+
+    /**
+     * Test that the total price property is properly handled
+     */
+    public function testTotalPrice()
+    {
+        $this->assertEquals(0.0, $this->instance->getTotalPrice());
 
         $value = 19.99;
         $this->instance->setTotalPrice($value);
         $this->assertEquals($value, $this->instance->getTotalPrice());
     }
-    
-    public function testOrder() {
+
+    /**
+     * Test that the order property is properly handled
+     */
+    public function testOrder()
+    {
         $this->assertNull($this->instance->getOrder());
 
         $value = $this->getMock('UCS\Component\Billing\Order\OrderInterface');
         $this->instance->setOrder($value);
         $this->assertEquals($value, $this->instance->getOrder());
     }
-    
-    public function testMergeNoException() {
+
+    /**
+     * Test that the merging is properly handled
+     */
+    public function testMergeNoException()
+    {
         $this->instance->setQuantity(3);
         $this->instance->merge($this->instance);
         $this->assertEquals(6, $this->instance->getQuantity());
     }
-    
+
     /**
      * @expectedException UCS\Component\Billing\Order\Exception\CannotMergeOrderItemException
      */
-    public function testMergeException() {
+    public function testMergeException()
+    {
         $item = new OrderItem();
         $item->setQuantity(4);
-        
+
         $this->instance->setQuantity(3);
         $this->instance->merge($item);
     }
-    
-    public function testPricers() {
+
+    /**
+     * Test that that the pricers property is properly handled
+     */
+    public function testPricers()
+    {
         $pricer1 = $this->getMock('UCS\Component\Billing\Pricer\PricerInterface');
         $pricer2 = $this->getMock('UCS\Component\Billing\Pricer\PricerInterface');
         $pricer3 = $this->getMock('UCS\Component\Billing\Pricer\PricerInterface');
-    
+
         $this->assertNotNull($this->instance->getPricers());
-        
+
         $this->instance->addPricer($pricer1);
         $this->instance->addPricer($pricer2);
-        
+
         $this->assertTrue($this->instance->hasPricer($pricer1));
         $this->assertTrue($this->instance->hasPricer($pricer2));
         $this->assertFalse($this->instance->hasPricer($pricer3));
-        
+
         // Check remove
         $this->instance->addPricer($pricer3);
         $this->assertTrue($this->instance->hasPricer($pricer3));
@@ -104,9 +134,13 @@ class OrderItemTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->instance->hasPricer($pricer1));
         $this->assertFalse($this->instance->hasPricer($pricer2));
     }
-    
-    public function testTotalPricersAmount() {
-        $this->assertEquals(0.0,$this->instance->getTotalPricersAmount());
+
+    /**
+     * Test that the total pricers ampunt is properly handled
+     */
+    public function testTotalPricersAmount()
+    {
+        $this->assertEquals(0.0, $this->instance->getTotalPricersAmount());
 
         $value = 19.99;
         $this->instance->setTotalPricersAmount($value);
