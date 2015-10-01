@@ -38,7 +38,7 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      *
      * @param OrderStateInterface $state
      *
-     * @return OrderInterface
+     * @return self
      */
     public function setState(OrderStateInterface $state);
 
@@ -52,7 +52,7 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
     /**
      * Mark the order as completed.
      *
-     * @return OrderInterface
+     * @return self
      */
     public function complete();
 
@@ -69,7 +69,7 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      *
      * @param Collection|OrderItemInterface[] $items
      *
-     * @return OrderInterface
+     * @return self
      */
     public function setItems(Collection $items);
 
@@ -77,6 +77,8 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * Add one item to the order
      *
      * @param OrderItemInterface $item
+     *
+     * @return self
      */
     public function addItem(OrderItemInterface $item);
 
@@ -85,7 +87,7 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      *
      * @param OrderItemInterface $item
      *
-     * @return OrderInterface
+     * @return self
      */
     public function removeItem(OrderItemInterface $item);
 
@@ -107,6 +109,8 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
 
     /**
      * Clears all items
+     *
+     * @return self
      */
     public function clearItems();
 
@@ -131,6 +135,8 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * Items Price + adjustments
      *
      * @param float $total
+     *
+     * @return self
      */
     public function setTotalPrice($total);
 
@@ -147,6 +153,8 @@ interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface,
      * or adjustments and so on...
      *
      * @param float $total
+     *
+     * @return self
      */
     public function setItemsTotalPrice($total);
 }
