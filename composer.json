@@ -11,12 +11,11 @@
             "email": "nicolas.macherey@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
         "doctrine/collections": "1.2.*",
-        "ucs/referenceable": "*",
-        "ucs/taxation": "dev-master",
+        "ucs/referenceable": "~3.0",
+        "ucs/taxation": "~0.9",
         "symfony/event-dispatcher": "2.3.*"
     },
     "autoload": {
