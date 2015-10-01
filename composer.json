@@ -16,7 +16,7 @@
         "doctrine/collections": "1.2.*",
         "ucs/referenceable": "~3.0",
         "ucs/taxation": "~0.9",
-        "symfony/event-dispatcher": "2.3.*"
+        "symfony/event-dispatcher": "~2.3"
     },
     "autoload": {
         "psr-0": { "UCS\\Component\\Billing": "" }
