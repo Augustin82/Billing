@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace UCS\Component\Billing\Tests\Order;
+namespace Tests\UCS\Component\Billing\Tests\Order;
 
 /* imports */
 use UCS\Component\Billing\Order\OrderItem;

@@ -15,11 +15,12 @@
         "php": ">=5.3.2",
         "doctrine/collections": "1.2.*",
         "ucs/referenceable": "~3.0",
-        "ucs/taxation": "~0.9",
         "symfony/event-dispatcher": "~2.3"
     },
     "autoload": {
-        "psr-0": { "UCS\\Component\\Billing": "" }
-    },
-    "target-dir": "UCS/Component/Billing"
+        "psr-4": {
+            "UCS\\Component\\Billing\\": "src",
+            "Tests\UCS\\Component\\Billing\\": "tests"
+        }
+    }
 }
