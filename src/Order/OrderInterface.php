@@ -12,7 +12,6 @@ namespace UCS\Component\Billing\Order;
 
 /* Imports */
 use Doctrine\Common\Collections\Collection;
-use UCS\Component\Referenceable\ReferenceableInterface;
 use UCS\Component\Billing\Pricer\PricerSubjectInterface;
 
 /**
@@ -24,8 +23,20 @@ use UCS\Component\Billing\Pricer\PricerSubjectInterface;
  *
  * @author Nicolas Macherey <nicolas.macherey@gmail.com>
  */
-interface OrderInterface extends PricerSubjectInterface, ReferenceableInterface, \Countable, \IteratorAggregate
+interface OrderInterface extends PricerSubjectInterface, \Countable, \IteratorAggregate
 {
+    /**
+     * @return string
+     */
+    public function getReference();
+
+    /**
+     * @param string $reference
+     *
+     * @return OrderInterface
+     */
+    public function setReference($reference);
+
     /**
      * Get the order state
      *
