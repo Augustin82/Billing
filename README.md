@@ -1,22 +1,21 @@
-# Billing Component
+# UCS Billing Component
 
-UCS Billing component provides an abstraction layer for representing advanced ordering and invoicing
-capabilities in your web application. It allows to model financial feeds and any kind of orders
-creation.
+The UCS Billing Component provides an abstraction layer for representing advanced ordering and invoicing
+capabilities in your web application. It allows modeling financial feeds and any kind of order creation.
 
-# Installing the component
+## Installation
 
-The component can be installed via composer by executing the following command:
+The component is available via composer with the following command:
 
     composer require ucs/billing
 
 # Basic usage
 
-## Implement your own OrderManager
+## Implementing your own OrderManager
 
-Even if the billing component comes with a pre-built order manager is has been made abstract because
-of the difference of implementations. The order manager provides an abstraction layer for dealing with
-specific data managers like Doctrine and Propel. If you intend to use the component directly you have
+Even if the Billing Component comes with a pre-built OrderManager is has been made abstract because
+of the difference of implementations. The OrderManager provides an abstraction layer for dealing with
+specific data managers like Doctrine and Propel. If you intend to use the component directly, you will need
 to create your own implementation:
 
     <?php
@@ -35,7 +34,7 @@ to create your own implementation:
          */
         public function deleteOrder(OrderInterface $order)
         {
-            // Implement the order deletion here
+            // Implement order deletion here
         }
 
         /**
@@ -55,10 +54,10 @@ to create your own implementation:
         }
     }
 
-## Use the component
+## Using the component
 
-The component is based on a concept "Order" which can contain "OrderItem"(s) and "Pricer"(s) and
-associated to specific "BilingInformation" and a given state "OrderState". An Order represents the
+The component is based on the concept of "Order" which can contain "OrderItem"(s) and "Pricer"(s),
+associated to specific "BilingInformation" and a given "OrderState". An Order represents the
 whole data that can be billed and presented into an invoice. Orders are then manipulated by the
 "OrderManager".
 
@@ -73,18 +72,18 @@ whole data that can be billed and presented into an invoice. Orders are then man
         ->setReference('my_ref') // must be unique
         ->setTotalPrice(10);
 
-    // add the item to the order
+    // add the items to the order
     $order->addItem($item);
 
-    // Create the order manager, you have to create your own implementation
+    // create your own implementation of the OrderManager
     $orderManager = new \Demo\Billing\OrderManager();
 
-    // Computes the total order data including tax rates and promotions
+    // computes the total order, including tax rates and promotions
     $orderManager->calculateOrderTotal($order);
 
 ## The role of pricers
 
-A "Pricer" is a concept that can be both associated to an Order and to an OrderItem. The pricer handles
+A "Pricer" is a concept that can be associated to both an Order and an OrderItem. The Pricer handles
 additional price modifiers included in the bill:
 
 - VAT
@@ -96,7 +95,7 @@ additional price modifiers included in the bill:
 It is a generic model that can represent all possible values that can change the total price of an Order
 or an OrderItem.
 
-Adding a pricer to an order or an order item is quite simple:
+Adding a Pricer to an Order or an OrderItem is quite simple:
 
     <?php
 
@@ -115,18 +114,20 @@ Adding a pricer to an order or an order item is quite simple:
         ->setAmount(20.0*$item->getTotalPrice()) // Credit
         ->setNeutral(false);
 
-    // Finally register into the item
+    // register the price to the item
     $item->addPricer($itemVat);
 
-    // Add the item to the order
+    // add the item to the order
     $order->addItem($item);
 
     $orderManager = new \UCS\Component\Billing\Order\OrderManager();
 
-    // Computes the total order data including tax rates and promotions
+    // computes the total order, including tax rates and promotions
     $orderManager->calculateOrderTotal($order);
 
-# Running the test suite
+# Tests
+
+## Running the test suite
 
 You can run the unit tests with the following command:
 
